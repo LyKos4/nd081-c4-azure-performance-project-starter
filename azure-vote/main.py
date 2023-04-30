@@ -1,4 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask
+from flask import request 
+from flask import render_template
 import os
 import random
 import redis
@@ -29,11 +31,11 @@ config_integration.trace_integrations(['logging'])
 config_integration.trace_integrations(['requests'])
 # Standard Logging
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=70d43a2f-9465-4afd-b603-5ed0f75f0d4a')
+handler = AzureLogHandler(connection_string='InstrumentationKey=38180117-a2bc-46a1-b598-00c08afe4b72')
 handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
 logger.addHandler(handler)
 # Logging custom Events 
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=70d43a2f-9465-4afd-b603-5ed0f75f0d4a'))
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=38180117-a2bc-46a1-b598-00c08afe4b72'))
 # Set the logging level
 logger.setLevel(logging.INFO)
 
@@ -43,7 +45,7 @@ stats = stats_module.stats
 view_manager = stats.view_manager
 exporter = metrics_exporter.new_metrics_exporter(
   enable_standard_metrics=True,
-  connection_string='InstrumentationKey=70d43a2f-9465-4afd-b603-5ed0f75f0d4a')
+  connection_string='InstrumentationKey=38180117-a2bc-46a1-b598-00c08afe4b72')
 view_manager.register_exporter(exporter)
 
 
@@ -52,7 +54,7 @@ view_manager.register_exporter(exporter)
 #tracer = # TODO: Setup tracer
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string='InstrumentationKey=70d43a2f-9465-4afd-b603-5ed0f75f0d4a'),
+        connection_string='InstrumentationKey=38180117-a2bc-46a1-b598-00c08afe4b72'),
     sampler=ProbabilitySampler(1.0),
 )
 app = Flask(__name__)
@@ -62,7 +64,7 @@ app = Flask(__name__)
 #middleware = # TODO: Setup flask middleware
 middleware = FlaskMiddleware(
     app,
-    exporter=AzureExporter(connection_string="InstrumentationKey=70d43a2f-9465-4afd-b603-5ed0f75f0d4a"),
+    exporter=AzureExporter(connection_string="InstrumentationKey=38180117-a2bc-46a1-b598-00c08afe4b72"),
     sampler=ProbabilitySampler(rate=1.0)
 )
 
@@ -154,4 +156,4 @@ if __name__ == "__main__":
     # TODO: Use the statement below when running locally
     #app.run() 
     # TODO: Use the statement below before deployment to VMSS
-    app.run(host='52.236.131.93', threaded=True, debug=True) # remote # default port 80
+    app.run(host='0.0.0.0', port='22' , threaded=True, debug=True) # remote # default port 80
