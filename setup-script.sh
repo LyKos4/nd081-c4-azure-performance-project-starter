@@ -2,11 +2,11 @@
 
 # Variables
 resourceGroup="acdnd-c4-project"
-location="westus"
+location="westeurope"
 osType="UbuntuLTS"
-vmssName="udacity-vmss"
+vmssName="nano4-vmss"
 adminName="udacityadmin"
-storageAccount="udacitydiag$RANDOM"
+storageAccount="nano4-sa"
 bePoolName="$vmssName-bepool"
 lbName="$vmssName-lb"
 lbRule="$lbName-network-rule"
