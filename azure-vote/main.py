@@ -137,7 +137,7 @@ def index():
 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
-      elif  request.form['vote'] == 'cats':
+      elif  request.form['vote'] == 'Cats':
 
             # Insert vote result into DB
             
@@ -152,7 +152,7 @@ def index():
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
             
-      elif  request.form['vote'] == 'dogs':
+      elif  request.form['vote'] == 'Dogs':
             
             # Insert vote result into DB
             
