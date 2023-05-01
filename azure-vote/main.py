@@ -118,7 +118,7 @@ def index():
 
     elif request.method == 'POST':
 
-        if request.form['vote'] == 'reset':
+      if request.form['vote'] == 'reset':
 
             # Empty table and return results
             r.set(vote1,0)
@@ -136,7 +136,7 @@ def index():
 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
-        elif  request.form['vote'] == 'cats':
+      elif  request.form['vote'] == 'cats':
 
             # Insert vote result into DB
             vote1 = r.get(button1).decode('utf-8')
@@ -151,7 +151,7 @@ def index():
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
             
-       elif  request.form['vote'] == 'dogs':
+      elif  request.form['vote'] == 'dogs':
             
             # Insert vote result into DB
             vote2 = r.get(button2).decode('utf-8')
