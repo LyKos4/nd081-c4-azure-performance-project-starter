@@ -106,12 +106,12 @@ def index():
         vote1 = r.get(button1).decode('utf-8')
         # TODO: use tracer object to trace cat vote
         with tracer.span(name="Cats Vote Count"):
-          r.incr(button1, 1)
+          r.incr(vote1, 1)
 
         vote2 = r.get(button2).decode('utf-8')
         # TODO: use tracer object to trace dog vote
         with tracer.span(name="Dogs Vote Count"):
-          r.incr(button2, 1)
+          r.incr(vote2, 1)
             
         # Return index with values
         return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
@@ -121,34 +121,43 @@ def index():
         if request.form['vote'] == 'reset':
 
             # Empty table and return results
-            r.set(button1,0)
-            r.set(button2,0)
-            vote1 = r.get(button1).decode('utf-8')
+            r.set(vote1,0)
+            r.set(vote2,0)
+            #vote1 = r.get(button1).decode('utf-8')
             #properties = {'custom_dimensions': {'Cats Vote': vote1}}
             # TODO: use logger object to log cat vote
             logger.info('Cat Vote Count', extra={'custom_dimensions': {'Count': vote1}})
 
             
-            vote2 = r.get(button2).decode('utf-8')
+            #vote2 = r.get(button2).decode('utf-8')
             #properties = {'custom_dimensions': {'Dogs Vote': vote2}}
             # TODO: use logger object to log dog vote
             logger.info('Dog Vote Count', extra={'custom_dimensions': {'Count': vote2}})
 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
-        else:
+        elif  request.form['vote'] == 'cats':
 
             # Insert vote result into DB
-            vote = request.form['vote']
-            r.incr(vote,1)
+            vote1 = r.get(button1).decode('utf-8')
+            r.incr(vote1,1)
 
             # Get current values
-            vote1 = r.get(button1).decode('utf-8')
+            #vote1 = r.get(button1).decode('utf-8')
             #properties = {'custom_dimensions': {'Cats Vote': vote1}}
             logger.info('Cat Vote Count', extra={'custom_dimensions': {'Count': vote1}})
 
+            # Return results
+            return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
+
             
+       elif  request.form['vote'] == 'dogs':
+            
+            # Insert vote result into DB
             vote2 = r.get(button2).decode('utf-8')
+            r.incr(vote2,1)
+            
+            #vote2 = r.get(button2).decode('utf-8')
             #properties = {'custom_dimensions': {'Dogs Vote': vote2}}
             logger.info('Dog Vote Count', extra={'custom_dimensions': {'Count': vote2}})
 
