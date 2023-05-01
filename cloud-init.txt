@@ -10,7 +10,8 @@ write_files:
     path: /etc/nginx/sites-available/reverse-proxy.conf
     content: |
       server {
-        listen 80;
+        listen 51.145.236.230:80;
+        server_name 51.145.236.230;
         location / {
           proxy_pass http://127.0.0.1:5000;
           proxy_http_version 1.1;

@@ -31,11 +31,11 @@ config_integration.trace_integrations(['logging'])
 config_integration.trace_integrations(['requests'])
 # Standard Logging
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=90c060d5-b81c-4b7d-ac34-44c781bd890a')
+handler = AzureLogHandler(connection_string='InstrumentationKey=bb52c33b-91a9-44c5-90ca-6c5333edf792')
 handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
 logger.addHandler(handler)
 # Logging custom Events 
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=90c060d5-b81c-4b7d-ac34-44c781bd890a'))
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=bb52c33b-91a9-44c5-90ca-6c5333edf792'))
 # Set the logging level
 logger.setLevel(logging.INFO)
 
@@ -45,7 +45,7 @@ stats = stats_module.stats
 view_manager = stats.view_manager
 exporter = metrics_exporter.new_metrics_exporter(
   enable_standard_metrics=True,
-  connection_string='InstrumentationKey=90c060d5-b81c-4b7d-ac34-44c781bd890a')
+  connection_string='InstrumentationKey=bb52c33b-91a9-44c5-90ca-6c5333edf792')
 view_manager.register_exporter(exporter)
 
 
@@ -54,7 +54,7 @@ view_manager.register_exporter(exporter)
 #tracer = # TODO: Setup tracer
 tracer = Tracer(
     exporter=AzureExporter(
-        connection_string='InstrumentationKey=90c060d5-b81c-4b7d-ac34-44c781bd890a'),
+        connection_string='InstrumentationKey=bb52c33b-91a9-44c5-90ca-6c5333edf792'),
     sampler=ProbabilitySampler(1.0),
 )
 app = Flask(__name__)
@@ -64,7 +64,7 @@ app = Flask(__name__)
 #middleware = # TODO: Setup flask middleware
 middleware = FlaskMiddleware(
     app,
-    exporter=AzureExporter(connection_string="InstrumentationKey=90c060d5-b81c-4b7d-ac34-44c781bd890a"),
+    exporter=AzureExporter(connection_string="InstrumentationKey=bb52c33b-91a9-44c5-90ca-6c5333edf792"),
     sampler=ProbabilitySampler(rate=1.0)
 )
 
