@@ -143,6 +143,7 @@ def index():
             
             r.incr(button1,1)
             vote1 = r.get(button1).decode('utf-8')
+            vote2 = r.get(button2).decode('utf-8')
             # Get current values
             #vote1 = r.get(button1).decode('utf-8')
             #properties = {'custom_dimensions': {'Cats Vote': vote1}}
@@ -157,6 +158,7 @@ def index():
             # Insert vote result into DB
             
             r.incr(button2,1)
+            vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')
             
             #vote2 = r.get(button2).decode('utf-8')
