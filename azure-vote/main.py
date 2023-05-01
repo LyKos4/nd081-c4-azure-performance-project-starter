@@ -121,9 +121,10 @@ def index():
       if request.form['vote'] == 'reset':
 
             # Empty table and return results
-            r.set(vote1,0)
-            r.set(vote2,0)
-            #vote1 = r.get(button1).decode('utf-8')
+            r.set(button1,0)
+            r.set(button2,0)
+            vote1 = r.get(button1).decode('utf-8')
+            vote2 = r.get(button1).decode('utf-8')
             #properties = {'custom_dimensions': {'Cats Vote': vote1}}
             # TODO: use logger object to log cat vote
             #logger.info('Cat Vote Count', extra={'custom_dimensions': {'Count': vote1}})
@@ -139,9 +140,9 @@ def index():
       elif  request.form['vote'] == 'cats':
 
             # Insert vote result into DB
+            
+            r.incr(button1,1)
             vote1 = r.get(button1).decode('utf-8')
-            r.incr(vote1,1)
-
             # Get current values
             #vote1 = r.get(button1).decode('utf-8')
             #properties = {'custom_dimensions': {'Cats Vote': vote1}}
@@ -154,8 +155,9 @@ def index():
       elif  request.form['vote'] == 'dogs':
             
             # Insert vote result into DB
+            
+            r.incr(button2,1)
             vote2 = r.get(button2).decode('utf-8')
-            r.incr(vote2,1)
             
             #vote2 = r.get(button2).decode('utf-8')
             #properties = {'custom_dimensions': {'Dogs Vote': vote2}}
